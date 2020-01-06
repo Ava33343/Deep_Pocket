@@ -47,6 +47,26 @@ for row in menu:
     prices.append(float(row[3]))
     costs.append(float(row[4]))
     
+    price = float(row[3])
+    cost = float(row[4])
+    
+    def profit(price, cost):
+    profit = price - cost
+    return profit
+
+"""
+Test Output: 
+
+price = 2
+cost = 1
+
+profit = profit(price, cost)
+print(f"Profit: {profit}")
+
+output
+Profit: 1
+"""
+    
 # @TODO: Initialize dict object to hold our key-value pairs of items and metrics
 report = {}
 
@@ -70,6 +90,8 @@ for row in sales:
     quantities.append(float(row[3]))
     sales_item.append(row[4])
     
+    quantity = float(row[3])
+    
  # @TODO:
     # If the item value not in the report, add it as a new entry with initialized metrics
     # Naming convention allows the keys to be ordered in logical fashion, count, revenue, cost, profit
@@ -79,30 +101,55 @@ revenue = []
 cogs = []
 profit = []
 
-count = {}
 
 # LOGICS:
 
+count = {}
+
 for i, value in enumerate(sales_item):
     if str(value) not in count:
-        count[str(value)] = quantities
+        count[str(value)] = quantities[i]
     else:
-        count[str(value)] += quantities
+        count[str(value)] += quantities[i]
         
 for sales_item in sorted(count):
     print('{}, {}'.format(sales_item, count[sales_item]))
     
+"""
+Output: 
+burnt garlic tonkotsu ramen, 9070.0
+miso crab ramen, 8890.0
+nagomi shoyu, 9132.0
+shio ramen, 9180.0
+soft-shell miso crab ramen, 9130.0
+spicy miso ramen, 9238.0
+tonkotsu ramen, 9288.0
+tori paitan ramen, 9156.0
+truffle butter ramen, 8982.0
+vegetarian curry + king trumpet mushroom ramen, 8824.0
+vegetarian spicy miso, 9216.0
+
+"""
+    
 
 # Create a dictionary report combining menu and sales data
+row_count += 1
 
-if items == sales_item: 
-    count += quantities
-    revenue += prices * quantities
-    cogs += costs * quantities
-    profit += (prices-costs) * quantities
-print(report)
+for i, value in enumerate(sales_item):
+    if sales_item in items:
+        def count(quantity):
+            count += quantity
+            return count
+        def revenue(price, quantity):
+            revenue += price * quantity
+            return revenue
+        def profit(price, profit):
+            profit += price * profit
+            return profit
 
-report = {"01-count":count, "02-revenue":revenue, "03-cogs":cogs, "04-profit":profit}
+
+        report = {"01-count":count, "02-revenue":revenue, "03-cogs":cogs, "04-profit":profit}
+        print(f"report = {sales_item} {"01-count":{count}, "02-revenue":{revenue}, "03-cogs":{cogs}, "04-profit":{profit}})
 
     else:
     print('{} does not equal {}! NO MATCH!'.format(items, sales_item))
