@@ -1,5 +1,5 @@
-# python-homework
-python homework during winter break
+# Deep Pocket
+python projects during winter break
 
 ## PyBank
 
